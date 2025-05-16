@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://d3a2sgehaqjdt"]
+[gd_scene load_steps=9 format=3 uid="uid://d3a2sgehaqjdt"]
 
-[ext_resource type="PackedScene" uid="uid://beg452kqkfydx" path="res://Scenes/Player.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://beg452kqkfydx" path="res://scenes/Player.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://cbrrsfnbg3p0g" path="res://scenes/Spawner.tscn" id="1_yaxqa"]
-[ext_resource type="Texture2D" uid="uid://r37ts0nyebjk" path="res://Assets/Familiar Looking Rocket.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://r37ts0nyebjk" path="res://assets/Familiar Looking Rocket.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://dd7fcijo64bic" path="res://assets/kenney_platformerpack/Spritesheets/spritesheet_gr_planet.png" id="4_8s0ta"]
 [ext_resource type="PackedScene" path="res://scenes/Area Trigger.tscn" id="4_t7cob"]
 
@@ -42,10 +42,20 @@ tile_size = Vector2i(128, 128)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_we7op")
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r53a5"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(2000, 1, 1)
+spread = 20.0
+gravity = Vector3(-500, 500, 0)
+scale_max = 10.0
+color = Color(0.517647, 0.65098, 0.713726, 1)
+
 [node name="Level 1" type="Node2D"]
 
 [node name="Spawner" parent="." instance=ExtResource("1_yaxqa")]
-position = Vector2(734, 90)
+position = Vector2(1700, 280)
+spawn_rate = 2.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(2170.27, 73.2836)
@@ -63,3 +73,10 @@ layer_0/tile_data = PackedInt32Array(196607, 0, 0, 131072, 0, 0, 131073, 0, 0, 1
 
 [node name="Player" parent="." instance=ExtResource("1")]
 position = Vector2(135.152, 106.001)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_r53a5")
+lifetime = 4.0
+visibility_rect = Rect2(-100, -100, 2000, 500)
+trail_enabled = true
